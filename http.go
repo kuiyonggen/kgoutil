@@ -17,7 +17,7 @@ func GetBody(baseUrl string, headers map[string]string, params map[string]string
     if err != nil {
         return err, nil
     } else {
-        if headers != nil {
+        if params != nil {
             queryParams := url.Values{}
             for k, v := range params {
                 queryParams.Add(k, v)
