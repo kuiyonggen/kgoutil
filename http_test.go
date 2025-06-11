@@ -15,7 +15,7 @@ type Symbol struct {
 }
 
 type responseData struct {
-    Result      []Symbol `json:"result"`
+    Result []Symbol `json:"result"`
 }
 
 func Test_Get(t *testing.T) {
@@ -35,7 +35,7 @@ func Test_Get(t *testing.T) {
                                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36",
                     },
                     map[string]string{
-                         "STOCK_TYPE": "0",
+                         "STOCK_TYPE": "1",
                          "REG_PROVINCE": "",
                          "CSRC_CODE": "",
                          "STOCK_CODE": "",
@@ -45,7 +45,7 @@ func Test_Get(t *testing.T) {
                          "isPagination": "",
                          "pageHelp.cacheSize": "1",
                          "pageHelp.beginPage": "1",
-                         "pageHelp.pageSize": "10000",
+                         "pageHelp.pageSize": "1",
                          "pageHelp.pageNo": "1",
                          "pageHelp.endPage": "1",
                     },
@@ -55,8 +55,14 @@ func Test_Get(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.Name, func(t *testing.T) {
                         var respData responseData
-			err := Get(tt.Url, tt.Headers, tt.Params, respData)
-			t.Logf("now: %v.", err)
+			err := Get(tt.Url, tt.Headers, tt.Params, &respData)
+			if err != nil {
+			    t.Logf("error: %v.\n", err)
+			} else {
+			    for _, s := range respData.Result {
+				t.Logf("%s, %s, %s, %s\n", s.AStockCode, s.CompanyAbbr, s.ListDate, s.CSRCCodeDesc)
+   		  	    }
+			}
 		})
 	}
 }
