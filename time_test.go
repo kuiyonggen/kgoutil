@@ -10,7 +10,8 @@ func Test_FormatDate(t *testing.T) {
         Date string
         wantDate string
     }{
-        {"Test_FormatDate", "20250611", "2025-06-11"},
+        {"Test_FormatDate_YYYYMMDD", "20250611", "2025-06-11"},
+        {"Test_FormatDate_YYYY-MM-DD", "2025-06-14", "2025-06-14"},
     }
 
     for _, tt := range tests {

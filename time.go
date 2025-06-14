@@ -11,5 +11,9 @@ func CurrentTime() int64 {
 
 // YYYYMMDD -> YYYY-MM-DD
 func FormatDate(s string) string {
-    return fmt.Sprintf("%s-%s-%s", s[0:4], s[4:6], s[6:])
+    if len(s) == 8 {
+        return fmt.Sprintf("%s-%s-%s", s[0:4], s[4:6], s[6:])
+    } else {
+        return s
+    }
 }
